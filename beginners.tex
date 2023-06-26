@@ -1,0 +1,382 @@
+\section{Curso Iniciante}
+Queries SQL realizadas para o curso SQL Course online. Estas, para a parte inicial do mesmo curso.
+
+\subsection{Selecting Data}
+
+1.) - Exiba o primeiro nome e a idade de todos os que estão na tabela.
+
+\begin{lstlisting}
+    SELECT first, age FROM empinfo;
+\end{lstlisting}
+
+\begin{tabular}{l l}
+    {\textbf{first}} & {\textbf{age}} \\
+    {John}           & {45}           \\
+    {Mary}           & {25}           \\
+    {Eric}           & {32}           \\
+    {Mary Ann}       & {32}           \\
+    {Ginger}         & {42}           \\
+    {Sebastian}      & {23}           \\
+    {Gus}            & {35}           \\
+    {Mary Ann}       & {52}           \\
+    {Erica}          & {60}           \\
+    {Leroy}          & {22}           \\
+    {Elroy}          & {22}          
+\end{tabular}\\ \\
+
+2.) - Exiba o nome, o sobrenome e a cidade de todos que não são de Payson.
+
+\begin{lstlisting}
+    SELECT first, last, city FROM empinfo WHERE city <> "Payson";
+\end{lstlisting}
+
+\begin{tabular}{l l l}
+    {\textbf{first}} & {\textbf{last}} & {\textbf{city}} \\
+    {Eric}           & {Edwards}       & {San Diego}     \\
+    {Mary Ann}       & {Edwards}       & {Phoenix}       \\
+    {Ginger}         & {Howell}        & {Cottonwood}    \\
+    {Sebastian}      & {Smith}         & {Gila Bend}     \\
+    {Gus}            & {Gray}          & {Bagdad}        \\
+    {Mary Ann}       & {May}           & {Tucson}        \\
+    {Erica}          & {Williams}      & {Show Low}      \\
+    {Leroy}          & {Brown}         & {Pinetop}       \\
+    {Elroy}          & {Cleaver}       & {Globe}        
+\end{tabular} \\ \\
+
+3.) - Exiba todas as colunas para todas as pessoas com mais de 40 anos.
+
+\begin{lstlisting}
+    SELECT * FROM empinfo WHERE age > 40;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l l}
+{\textbf{first}} & {\textbf{last}} & {\textbf{id}} & {\textbf{age}} & {\textbf{city}} & {\textbf{state}} \\
+{John}           & {Jones}         & {99980}       & {45}           & {Payson}        & {Arizona}        \\
+{Ginger}         & {Howell}        & {98002}       & {42}           & {Cottonwood}    & {Arizona}        \\
+{Mary Ann}       & {May}           & {32326}       & {52}           & {Tucson}        & {Arizona}        \\
+{Erica}          & {Williams}      & {32327}       & {60}           & {Show Low}      & {Arizona}       
+\end{tabular} \\ \\ 
+
+4.) - Exiba o nome e o sobrenome de todos cujo sobrenome termina em “ay”.
+
+\begin{lstlisting}
+    SELECT first, last FROM empinfo WHERE last LIKE "%ay"
+\end{lstlisting}
+
+\begin{tabular}{l l l}
+    {\textbf{first}} & {\textbf{last}}\\
+    {Gus}            & {Gray}         \\
+    {Mary Ann}       & {May}
+\end{tabular} \\ \\
+
+5.) - Exiba todas as colunas para todos cujo primeiro nome é igual a “Mary”.
+
+\begin{lstlisting}
+    SELECT * FROM empinfo WHERE first = "Mary";
+\end{lstlisting}
+
+\begin{tabular}{l l l l l l}
+    {\textbf{first}} & {\textbf{last}} & {\textbf{id}} & {\textbf{age}} & {\textbf{city}} & {\textbf{state}} \\
+    {Mary}           & {Jones}         & {99982}       & {25}           & {Payson}        & {Arizona}       
+\end{tabular} \\ \\ 
+
+6.) - Exiba todas as colunas para todos cujo primeiro nome contenha “Mary”.
+
+\begin{lstlisting}
+    SELECT * FROM empinfo WHERE first LIKE "%Mary%";
+\end{lstlisting}
+
+\begin{tabular}{llllll}
+    {\textbf{first}} & {\textbf{last}} & {\textbf{id}} & {\textbf{age}} & {\textbf{city}} & {\textbf{state}} \\
+    {Mary}      & {Jones}    & {99982}    & {25}    & {Payson}   & {Arizona}        \\
+    Mary Ann    & Edwards    & 88233      & 32      & Phoenix    & Arizona          \\
+    Mary Ann    & May        & 32326      & 52      & Tucson     & Arizona                              
+\end{tabular}
+
+
+\subsection{Creating Tables}
+
+\begin{lstlisting}
+    CREATE TABLE myemployees(
+        firstname  VARCHAR(50),
+        lastname   VARCHAR(50),
+        title      VARCHAR(50),
+        age        NUMBER(128),
+        salary     NUMBER(2000000)
+    );
+\end{lstlisting}
+
+
+\subsection{Inserting Into a Table}
+
+\begin{lstlisting}
+    INSERT INTO 
+    myemployees
+        (firstname, lastname, title, age, salary)
+    VALUES 
+        ("Jonie", "Weber", "Secretary", 28, 19500.00);
+
+    INSERT INTO 
+    myemployees
+        (firstname, lastname, title, age, salary)
+    VALUES 
+        ("Potsy", "Weber", "Programmer", 32, 45300.00);
+    
+    INSERT INTO 
+    myemployees
+        (firstname, lastname, title, age, salary)
+    VALUES 
+        ("Dirk", "Smith", "Programmer II", 45, 75020.00);
+\end{lstlisting}
+
+1.) - Selecione todas as colunas para todos em sua tabela de funcionários.
+
+\begin{lstlisting}
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber}             & {Secretary}      & {28}           & {19500}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {45300}           \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {45}           & {75020}          
+\end{tabular} \\ \\
+
+2.) - Selecione todas as colunas para todos com um salário acima de 30.000.
+
+\begin{lstlisting}
+    SELECT * FROM myemployees WHERE salary > 30000;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {45300}           \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {45}           & {75020}          
+\end{tabular} \\ \\
+
+3.) - Selecione o nome e o sobrenome de todas as pessoas com menos de 30 anos.
+
+\begin{lstlisting}
+    SELECT firstname, lastname FROM myemployees WHERE age < 30;
+\end{lstlisting}
+
+\begin{tabular}{l l}
+    {\textbf{firstname}} & {\textbf{lastname}} \\
+    {Jonie}              & {Weber}
+\end{tabular} \\ \\
+
+4.) - Selecione o nome, o sobrenome e o salário de qualquer pessoa com “Programmer” no cargo.
+
+\begin{lstlisting}
+    SELECT firstname, lastname FROM myemployees WHERE title LIKE "%Programmer%";
+\end{lstlisting}
+
+\begin{tabular}{l l}
+    {\textbf{firstname}} & {\textbf{lastname}} \\
+    {Potsy}              & {Weber}             \\
+    {Dirk}               & {Smith}             
+\end{tabular} \\ \\
+
+5.) - Selecione todas as colunas para todos cujo sobrenome contenha “ebe”.
+
+\begin{lstlisting}
+    SELECT * FROM myemployees WHERE lastname LIKE "%ebe%";
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber}             & {Secretary}      & {28}           & {19500}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {45300}
+\end{tabular} \\ \\
+
+6.) - Selecione o primeiro nome para todos cujo primeiro nome é igual a “Potsy”.
+
+\begin{lstlisting}
+    SELECT firstname FROM myemployees WHERE firstname = "Potsy";
+\end{lstlisting}
+
+\begin{tabular}{l}
+    {\textbf{firstname}} \\
+    {Potsy}          
+\end{tabular} \\ \\
+
+7.) - Selecione todas as colunas para todos com mais de 80 anos.
+
+\begin{lstlisting}
+    SELECT * FROM myemployees WHERE age > 80;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}}
+\end{tabular} \\ \\
+
+8.) - Selecione todas as colunas para todos cujo sobrenome termina em “ith”
+
+\begin{lstlisting}
+    SELECT * FROM myemployees WHERE lastname LIKE "%ith";
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {45}           & {75020}          
+\end{tabular} \\ \\
+
+
+\subsection{Updating Records}
+
+1.) - Jonie Weber acabou de se casar com Bob Williams. Ela solicitou que seu sobrenome fosse atualizado para Weber-Williams.
+
+\begin{lstlisting}
+    UPDATE myemployees 
+        SET lastname = "Weber-Williams" 
+        WHERE firstname = "Jonie";
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber-Williams}    & {Secretary}      & {28}           & {19500}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {45300}           \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {45}           & {75020}          
+\end{tabular} \\ \\ 
+
+2.) - O aniversário de Dirk Smith é hoje, adicione 1 a sua idade.
+
+\begin{lstlisting}
+    UPDATE myemployees 
+	    SET age = age + 1 
+	    WHERE firstname = "Dirk";
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber-Williams}    & {Secretary}      & {28}           & {19500}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {45300}           \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {46}           & {75020}          
+\end{tabular} \\ \\
+
+3.) - Todas as secretárias passam a ser chamadas de “Auxiliar Administrativo”. Atualize todos os títulos de acordo.
+
+\begin{lstlisting}
+    UPDATE myemployees 
+	    SET title = "Administrative Assistant" 
+	    WHERE title = "Secretary";
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber-Williams}    & {Administrative Assistant}      & {28}           & {19500}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {45300}           \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {46}           & {75020}          
+\end{tabular} \\ \\
+
+4.) - Todos que estão ganhando menos de 30.000 receberão um aumento de 3.500 por ano.
+
+\begin{lstlisting}
+    UPDATE myemployees 
+	    SET salary = salary + 3500 
+	    WHERE salary < 30000;
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber-Williams}    & {Administrative Assistant}      & {28}           & {23000}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {45300}           \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {46}           & {75020}          
+\end{tabular} \\ \\
+
+5.) - Todos que estão ganhando mais de 33.500 receberão um aumento de 4.500 por ano.
+
+\begin{lstlisting}
+    UPDATE myemployees 
+	    SET salary = salary + 4500 
+	    WHERE salary > 33500;
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber-Williams}    & {Administrative Assistant}      & {28}           & {23000}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {49800}           \\
+    {Dirk}               & {Smith}             & {Programmer II}  & {46}           & {79520}          
+\end{tabular} \\ \\
+
+6.) - Todos os títulos de “Programador II” agora são promovidos a “Programador III”
+
+\begin{lstlisting}
+    UPDATE myemployees 
+	    SET title = "Programmer III" 
+	    WHERE title = "Programmer II" ;
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber-Williams}    & {Administrative Assistant}      & {28}           & {23000}           \\
+    {Potsy}              & {Weber}             & {Programmer}     & {32}           & {49800}           \\
+    {Dirk}               & {Smith}             & {Programmer III}  & {46}           & {79520}          
+\end{tabular} \\ \\
+
+7.) - Todos os títulos de “Programador” agora são promovidos a “Programador II”
+
+\begin{lstlisting}
+    UPDATE myemployees 
+	    SET title = "Programmer II" 
+	    WHERE title = "Programmer" ;
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Jonie}              & {Weber-Williams}    & {Administrative Assistant}      & {28}           & {23000}           \\
+    {Potsy}              & {Weber}             & {Programmer II}     & {32}           & {49800}           \\
+    {Dirk}               & {Smith}             & {Programmer III}  & {46}           & {79520}          
+\end{tabular} \\ \\
+
+
+\subsection{Deleting Records}
+
+1.) - Jonie Weber-Williams acabou de sair, remova seu registro da tabela.
+
+\begin{lstlisting}
+    DELETE FROM myemployees
+	    WHERE firstname = "Jonie" AND lastname = "Weber-Williams";
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Potsy}              & {Weber}             & {Programmer II}     & {32}           & {49800}           \\
+    {Dirk}               & {Smith}             & {Programmer III}  & {46}           & {79520}          
+\end{tabular} \\ \\
+
+2.) - É hora de cortes orçamentários. Remova todos os funcionários que estão ganhando mais de 70.000 dólares.
+
+\begin{lstlisting}
+    DELETE FROM myemployees
+	    WHERE salary > 70000;
+
+    SELECT * FROM myemployees;
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{title}} & {\textbf{age}} & {\textbf{salary}} \\
+    {Potsy}              & {Weber}             & {Programmer II}     & {32}           & {49800}       
+\end{tabular} \\ \\
+
+\subsection{Drop a Table}
+
+\begin{lstlisting}
+    DROP TABLE myemployees;
+\end{lstlisting}
