@@ -1,0 +1,393 @@
+\section{Advanced Course}
+
+\subsection{Select Statement}
+
+1.) - Na tabela items\_ordered, selecione uma lista de todos os itens comprados para o customerid 10449. Exiba o customerid, item e preço para este cliente.
+
+\begin{lstlisting}
+SELECT customerid, item, price
+	FROM items_ordered
+	WHERE customerid = 10449;
+\end{lstlisting}
+
+\begin{tabular}{l l l}
+    {\textbf{customerid}} & {\textbf{item}} & {\textbf{price}} \\
+    {10449}               & {Unicycle}      & {180.79}         \\
+    {10449}               & {Snow Shoes}    & {45}             \\
+    {10449}               & {Bicycle}       & {380.5}          \\
+    {10449}               & {Canoe}         & {280}            \\
+    {10449}               & {Flashlight}    & {4.5}            \\
+    {10449}               & {Canoe paddle}  & {40}            
+\end{tabular} \\ \\
+
+2.) - Selecione todas as colunas da tabela items\_ordered para quem comprou uma Tent.
+
+\begin{lstlisting}
+SELECT *
+	FROM items_ordered
+	WHERE item = "Tent";
+\end{lstlisting}
+
+\begin{tabular}{l l l l l}
+    {\textbf{customerid}} & {\textbf{order\_date}} & {\textbf{item}} & {\textbf{quantity}} & {\textbf{price}} \\
+    {10439}               & {18-Sep-1999}          & {Tent}          & {1}                 & {88}             \\
+    {10438}               & {18-Jan-2000}          & {Tent}          & {1}                 & {79.99}         
+\end{tabular} \\ \\
+
+3.) - Selecione os valores customerid, order\_date e item da tabela items\_ordered para todos os itens na coluna de itens que começam com a letra “S”.
+
+\begin{lstlisting}
+SELECT customerid, order_date, item
+	FROM items_ordered
+	WHERE item LIKE "S%";
+\end{lstlisting}
+
+\begin{tabular}{lll}
+    {\textbf{customerid}} & {\textbf{order\_date}} & {\textbf{item}} \\
+    10449                                      & 01-Sep-1999                                 & Snow Shoes                           \\
+    10410                                      & 28-Oct-1999                                 & Sleeping Bag                         \\
+    10101                                      & 08-Mar-2000                                 & Sleeping Bag                         \\
+    10330                                      & 19-Apr-2000                                 & Shovel                              
+\end{tabular} \\ \\ 
+
+\newpage
+
+4.) - Selecione os itens distintos na tabela items\_ordered. Em outras palavras, exiba uma listagem de cada um dos itens exclusivos da tabela items\_ordered.
+
+\begin{lstlisting}
+SELECT DISTINCT item FROM items_ordered;
+\end{lstlisting}
+
+\begin{tabular}{l}
+    {\textbf{item}}       \\
+    {Pogo stick}          \\
+    {Raft}                \\
+    {Skateboard}          \\
+    {Life Vest}           \\
+    {Parachute}           \\
+    {Umbrella}            \\
+    {Unicycle}            \\
+    {Ski Poles}           \\
+    {Rain Coat}           \\
+    {Snow Shoes}          \\
+    {Tent}                \\
+    {Lantern}             \\
+    {Sleeping Bag}        \\
+    {Pillow}              \\
+    {Helmet}              \\
+    {Bicycle}             \\
+    {Canoe}               \\
+    {Hoola Hoop}          \\
+    {Flashlight}          \\
+    {Inflatable Mattress} \\
+    {Lawnchair}           \\
+    {Compass}             \\
+    {Pocket Knife}        \\
+    {Canoe paddle}        \\
+    {Ear Muffs}           \\
+    {Shovel}             
+\end{tabular} \\ \\
+
+5.) - Crie suas próprias declarações selecionadas e envie-as.
+
+\begin{lstlisting}
+SELECT DISTINCT item FROM items_ordered WHERE price < 10;
+\end{lstlisting}
+
+\begin{tabular}{l}
+    {\textbf{item}}       \\
+    {Umbrella}            \\
+    {Pillow}              \\
+    {Compass}             \\
+    {Flashlight}
+\end{tabular} \\ \\
+
+\subsection{Aggregate Functions}
+
+1.) - Selecione o preço máximo de qualquer item pedido na tabela items\_ordered. Dica: selecione apenas o preço máximo.
+
+\begin{lstlisting}
+SELECT MAX(price) FROM items_ordered;
+\end{lstlisting}
+
+\begin{tabular}{l}
+    {\textbf{MAX(price)}}       \\
+    {1250}
+\end{tabular} \\ \\
+
+2.) - Selecione o preço médio de todos os itens pedidos que foram comprados no mês de dezembro.
+
+\begin{lstlisting}
+SELECT AVG(price) FROM items_ordered WHERE order_date LIKE "%Dec%";
+\end{lstlisting}
+
+\begin{tabular}{l}
+    {\textbf{AVG(price)}}       \\
+    {174.3125}
+\end{tabular} \\ \\
+
+3.) - Qual é o número total de linhas na tabela items\_ordered?
+
+\begin{lstlisting}
+SELECT COUNT(*) FROM items_ordered;
+\end{lstlisting}
+
+\begin{tabular}{l}
+    {\textbf{COUNT(*)}}       \\
+    {32}
+\end{tabular} \\ \\
+
+4.) - Para todas as barracas que foram encomendadas na tabela items\_ordered, qual é o preço da barraca mais barata? Dica: Sua consulta deve retornar apenas o preço.
+
+\begin{lstlisting}
+SELECT MIN(price) FROM items_ordered WHERE item = "Tent";
+\end{lstlisting}
+
+\begin{tabular}{l}
+    {\textbf{MIN(price)}}       \\
+    {79.99}
+\end{tabular} \\ \\
+
+\subsection{Group By Clause}
+
+1.) - Quantas pessoas estão em cada estado único na tabela de clientes? Selecione o estado e exiba o número de pessoas em cada um. Dica: count é usado para contar linhas em uma coluna, sum funciona apenas em dados numéricos.
+
+
+\begin{lstlisting}
+SELECT COUNT(customerid), state FROM customers GROUP BY state;
+\end{lstlisting}
+
+\begin{tabular}{l l}
+    {\textbf{COUNT(customerid)}} & {\textbf{state}} \\
+    {6}                          & {Arizona}        \\
+    {2}                          & {Colorado}       \\
+    {1}                          & {Hawaii}         \\
+    {1}                          & {Idaho}          \\
+    {1}                          & {North Carolina} \\
+    {2}                          & {Oregon}         \\
+    {1}                          & {South Carolina} \\
+    {2}                          & {Washington}     \\
+    {1}                          & {Wisconsin}     
+\end{tabular} \\ \\
+
+2.) - Na tabela items\_ordered, selecione o item, preço máximo e preço mínimo para cada item específico na tabela. Dica: Os itens precisarão ser divididos em grupos separados.
+
+\begin{lstlisting}
+SELECT item, MAX(price), MIN(price) FROM items_ordered GROUP BY item;
+\end{lstlisting}
+
+\begin{tabular}{l l l}
+    {\textbf{item}}       & {\textbf{MAX(price)}} & {\textbf{MIN(price)}} \\
+    {Bicycle}             & {380.5}               & {380.5}               \\
+    {Canoe}               & {280}                 & {280}                 \\
+    {Canoe paddle}        & {40}                  & {40}                  \\
+    {Compass}             & {8}                   & {8}                   \\
+    {Ear Muffs}           & {12.5}                & {12.5}                \\
+    {Flashlight}          & {28}                  & {4.5}                 \\
+    {Helmet}              & {22}                  & {22}                  \\
+    {Hoola Hoop}          & {14.75}               & {14.75}               \\
+    {Inflatable Mattress} & {38}                  & {38}                  \\
+    {Lantern}             & {29}                  & {16}                  \\
+    {Lawnchair}           & {32}                  & {32}                  \\
+    {Life Vest}           & {125}                 & {125}                 \\
+    {Parachute}           & {1250}                & {1250}                \\
+    {Pillow}              & {8.5}                 & {8.5}                 \\
+    {Pocket Knife}        & {22.38}               & {22.38}               \\
+    {Pogo stick}          & {28}                  & {28}                  \\
+    {Raft}                & {58}                  & {58}                  \\
+    {Rain Coat}           & {18.3}                & {18.3}                \\
+    {Shovel}              & {16.75}               & {16.75}               \\
+    {Skateboard}          & {33}                  & {33}                  \\
+    {Ski Poles}           & {25.5}                & {25.5}                \\
+    {Sleeping Bag}        & {89.22}               & {88.7}                \\
+    {Snow Shoes}          & {45}                  & {45}                  \\
+    {Tent}                & {88}                  & {79.99}               \\
+    {Umbrella}            & {6.75}                & {4.5}                 \\
+    {Unicycle}            & {192.5}               & {180.79}             
+\end{tabular} \\ \\
+
+3.) - Quantos pedidos cada cliente fez? Use a tabela items\_ordered. Selecione o customerid, o número de pedidos que eles fizeram e a soma de seus pedidos.
+
+\begin{lstlisting}
+SELECT customerid, COUNT(*) FROM items_ordered GROUP BY customerid;
+\end{lstlisting}
+
+\begin{tabular}{l l}
+    {\textbf{customerid}} & {\textbf{COUNT(*)}} \\
+    {10101}               & {6}                 \\
+    {10298}               & {5}                 \\
+    {10299}               & {2}                 \\
+    {10315}               & {1}                 \\
+    {10330}               & {3}                 \\
+    {10339}               & {1}                 \\
+    {10410}               & {2}                 \\
+    {10413}               & {1}                 \\
+    {10438}               & {3}                 \\
+    {10439}               & {2}                 \\
+    {10449}               & {6}                
+\end{tabular} \\ \\
+
+\newpage
+
+\subsection{Having Clause}
+
+1.) - Quantas pessoas estão em cada estado único na tabela de clientes que tem mais de uma pessoa no estado? Selecione o estado e exiba o número de quantas pessoas estão em cada, se for maior que 1.
+
+\begin{lstlisting}
+SELECT COUNT(*), state 
+	FROM customers
+	GROUP BY state
+	HAVING COUNT(*) > 1;
+\end{lstlisting}
+
+\begin{tabular}{ll}
+    {\textbf{COUNT(*)}} & \textbf{state} \\
+    {6}                 & Arizona        \\
+    {2}                 & Colorado       \\
+    {2}                 & Oregon         \\
+    {2}                 & Washington    
+\end{tabular} \\ \\
+
+
+
+2.) - Na tabela items\_ordered, selecione o item, preço máximo e preço mínimo para cada item específico na tabela. Exiba os resultados somente se o preço máximo de um dos itens for maior que 190,00.
+
+\begin{lstlisting}
+SELECT item, MAX(price), MIN(price)
+	FROM items_ordered
+	GROUP BY item
+	HAVING MAX(price) > 190.00;
+\end{lstlisting}
+
+
+\begin{tabular}{lll}
+    {\textbf{item}} & {\textbf{MAX(price)}} & {\textbf{MIN(price)}} \\
+    {Bicycle}       & {380.5}               & {380.5}               \\
+    {Canoe}         & {280}                 & {280}                 \\
+    {Parachute}     & {1250}                & {1250}                \\
+    {Unicycle}      & {192.5}               & {180.79}             
+\end{tabular} \\ \\
+
+
+3.) - Quantos pedidos cada cliente fez? Use a tabela items\_ordered. Selecione o ID do cliente, o número de pedidos que eles fizeram e a soma de seus pedidos, caso tenham comprado mais de 1 item.
+
+\begin{lstlisting}
+SELECT customerid, COUNT(*), SUM(price)
+	FROM items_ordered
+	GROUP BY customerid
+	HAVING COUNT(*) > 1;
+\end{lstlisting}
+
+\begin{tabular}{lll}
+    {\textbf{customerid}} & {\textbf{COUNT(*)}} & {\textbf{SUM(price)}} \\
+    {10101}               & {6}                 & {320.75}              \\
+    {10298}               & {5}                 & {118.88}              \\
+    {10299}               & {2}                 & {1288}                \\
+    {10330}               & {3}                 & {72.75}               \\
+    {10410}               & {2}                 & {281.72}              \\
+    {10438}               & {3}                 & {95.24}               \\
+    {10439}               & {2}                 & {113.5}               \\
+    {10449}               & {6}                 & {930.79}             
+\end{tabular} \\ \\
+
+\newpage
+
+\section{Order By Clause}
+
+1.) - Selecione o sobrenome, o nome e a cidade de todos os clientes na tabela de clientes. Exiba os resultados em ordem crescente com base no sobrenome.
+
+\begin{lstlisting}
+SELECT * FROM customers ORDER BY lastname;
+\end{lstlisting}
+
+\begin{tabular}{lllll}
+    {\textbf{customerid}} & {\textbf{firstname}} & {\textbf{lastname}} & \textbf{city} & \textbf{state} \\
+    {10298}               & {Leroy}              & {Brown}             & Pinetop       & Arizona        \\
+    {10408}               & {Elroy}              & {Cleaver}           & Globe         & Arizona        \\
+    {10330}               & {Shawn}              & {Dalton}            & Cannon Beach  & Oregon         \\
+    {10413}               & {Donald}             & {Davids}            & Gila Bend     & Arizona        \\
+    {10439}               & {Conrad}             & {Giles}             & Telluride     & Colorado       \\
+    {10429}               & {Sarah}              & {Graham}            & Greensboro    & North Carolina \\
+    {10101}               & {John}               & {Gray}              & Lynden        & Washington     \\
+    {10338}               & {Michael}            & {Howell}            & Tillamook     & Oregon         \\
+    10410                                                              & Mary Ann                                                          & Howell                                                           & Charleston    & South Carolina \\
+    10315                                                              & Lisa                                                              & Jones                                                            & Oshkosh       & Wisconsin      \\
+    10299                                                              & Elroy                                                             & Keller                                                           & Snoqualmie    & Washington     \\
+    10329                                                              & Kelly                                                             & Mendoza                                                          & Kailua        & Hawaii         \\
+    10449                                                              & Isabela                                                           & Moore                                                            & Yuma          & Arizona        \\
+    10419                                                              & Linda                                                             & Sakahara                                                         & Nogales       & Arizona        \\
+    10339                                                              & Anthony                                                           & Sanchez                                                          & Winslow       & Arizona        \\
+    10325                                                              & Ginger                                                            & Schultz                                                          & Pocatello     & Idaho          \\
+    10438                                                              & Kevin                                                             & Smith                                                            & Durango       & Colorado      
+\end{tabular} \\ \\
+
+
+2.) - Igual ao exercício nº 1, mas exiba os resultados em ordem decrescente.
+
+\begin{lstlisting}
+SELECT * FROM customers ORDER BY lastname DESC;
+\end{lstlisting}
+
+\begin{tabular}{lllll}
+    {\textbf{customerid}} & {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{city}} & {\textbf{state}} \\
+    {10438}               & {Kevin}              & {Smith}             & {Durango}       & {Colorado}       \\
+    {10325}               & {Ginger}             & {Schultz}           & {Pocatello}     & {Idaho}          \\
+    {10339}               & {Anthony}            & {Sanchez}           & {Winslow}       & {Arizona}        \\
+    {10419}               & {Linda}              & {Sakahara}          & {Nogales}       & {Arizona}        \\
+    {10449}               & {Isabela}            & {Moore}             & {Yuma}          & {Arizona}        \\
+    {10329}               & {Kelly}              & {Mendoza}           & {Kailua}        & {Hawaii}         \\
+    {10299}               & {Elroy}              & {Keller}            & {Snoqualmie}    & {Washington}     \\
+    {10315}               & {Lisa}               & {Jones}             & {Oshkosh}       & {Wisconsin}      \\
+    {10338}               & {Michael}            & {Howell}            & {Tillamook}     & {Oregon}         \\
+    {10410}               & {Mary Ann}           & {Howell}            & {Charleston}    & {South Carolina} \\
+    {10101}               & {John}               & {Gray}              & {Lynden}        & {Washington}     \\
+    {10429}               & {Sarah}              & {Graham}            & {Greensboro}    & {North Carolina} \\
+    {10439}               & {Conrad}             & {Giles}             & {Telluride}     & {Colorado}       \\
+    {10413}               & {Donald}             & {Davids}            & {Gila Bend}     & {Arizona}        \\
+    {10330}               & {Shawn}              & {Dalton}            & {Cannon Beach}  & {Oregon}         \\
+    {10408}               & {Elroy}              & {Cleaver}           & {Globe}         & {Arizona}        \\
+    {10298}               & {Leroy}              & {Brown}             & {Pinetop}       & {Arizona}       
+\end{tabular} \\ \\
+
+
+3.) - Selecione o item e o preço de todos os itens na tabela items\_ordered cujo preço seja maior que 10,00. Exiba os resultados em ordem crescente com base no preço.
+
+\begin{lstlisting}
+SELECT item, price
+	FROM items_ordered 
+	WHERE price > 10 
+	ORDER BY price;
+\end{lstlisting}
+
+\begin{tabular}{ll}
+    {\textbf{item}}       & {\textbf{price}} \\
+    {Ear Muffs}           & {12.5}           \\
+    {Hoola Hoop}          & {14.75}          \\
+    {Lantern}             & {16}             \\
+    {Shovel}              & {16.75}          \\
+    {Rain Coat}           & {18.3}           \\
+    {Helmet}              & {22}             \\
+    {Pocket Knife}        & {22.38}          \\
+    {Ski Poles}           & {25.5}           \\
+    {Pogo stick}          & {28}             \\
+    {Flashlight}          & {28}             \\
+    {Lantern}             & {29}             \\
+    {Lawnchair}           & {32}             \\
+    {Skateboard}          & {33}             \\
+    {Inflatable Mattress} & {38}             \\
+    {Canoe paddle}        & {40}             \\
+    {Snow Shoes}          & {45}             \\
+    {Raft}                & {58}             \\
+    {Tent}                & {79.99}          \\
+    {Tent}                & {88}             \\
+    {Sleeping Bag}        & {88.7}           \\
+    {Sleeping Bag}        & {89.22}          \\
+    {Life Vest}           & {125}            \\
+    {Unicycle}            & {180.79}         \\
+    {Unicycle}            & {192.5}          \\
+    {Canoe}               & {280}            \\
+    {Bicycle}             & {380.5}          \\
+    {Parachute}           & {1250}          
+\end{tabular} \\ \\
+
+
