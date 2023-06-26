@@ -391,3 +391,219 @@ SELECT item, price
 \end{tabular} \\ \\
 
 
+\section{Combining Conditions And Booleans Operators}
+
+1.) - Selecione customerid, order\_date e item da tabela items\_ordered para todos os itens, a menos que sejam ‘Snow Shoes’ ou se forem ‘Ear Muffs’. Exiba as linhas, desde que não sejam nenhum desses dois itens.
+
+\begin{lstlisting}
+SELECT customerid, item, order_date
+	FROM items_ordered
+	WHERE item <> "Snow Shoes" OR item <> "Ear Muffs";
+\end{lstlisting}
+
+\begin{tabular}{lll}
+    {\textbf{customerid}} & {\textbf{item}}       & {\textbf{order\_date}} \\
+    {10330}               & {Pogo stick}          & {30-Jun-1999}          \\
+    {10101}               & {Raft}                & {30-Jun-1999}          \\
+    {10298}               & {Skateboard}          & {01-Jul-1999}          \\
+    {10101}               & {Life Vest}           & {01-Jul-1999}          \\
+    {10299}               & {Parachute}           & {06-Jul-1999}          \\
+    {10339}               & {Umbrella}            & {27-Jul-1999}          \\
+    {10449}               & {Unicycle}            & {13-Aug-1999}          \\
+    {10439}               & {Ski Poles}           & {14-Aug-1999}          \\
+    {10101}               & {Rain Coat}           & {18-Aug-1999}          \\
+    {10449}               & {Snow Shoes}          & {01-Sep-1999}          \\
+    {10439}               & {Tent}                & {18-Sep-1999}          \\
+    {10298}               & {Lantern}             & {19-Sep-1999}          \\
+    {10410}               & {Sleeping Bag}        & {28-Oct-1999}          \\
+    {10438}               & {Umbrella}            & {01-Nov-1999}          \\
+    {10438}               & {Pillow}              & {02-Nov-1999}          \\
+    {10298}               & {Helmet}              & {01-Dec-1999}          \\
+    {10449}               & {Bicycle}             & {15-Dec-1999}          \\
+    {10449}               & {Canoe}               & {22-Dec-1999}          \\
+    {10101}               & {Hoola Hoop}          & {30-Dec-1999}          \\
+    {10330}               & {Flashlight}          & {01-Jan-2000}          \\
+    {10101}               & {Lantern}             & {02-Jan-2000}          \\
+    {10299}               & {Inflatable Mattress} & {18-Jan-2000}          \\
+    {10438}               & {Tent}                & {18-Jan-2000}          \\
+    {10413}               & {Lawnchair}           & {19-Jan-2000}          \\
+    {10410}               & {Unicycle}            & {30-Jan-2000}          \\
+    {10315}               & {Compass}             & {02-Feb-2000}          \\
+    {10449}               & {Flashlight}          & {29-Feb-2000}          \\
+    {10101}               & {Sleeping Bag}        & {08-Mar-2000}          \\
+    {10298}               & {Pocket Knife}        & {18-Mar-2000}          \\
+    {10449}               & {Canoe paddle}        & {19-Mar-2000}          \\
+    {10298}               & {Ear Muffs}           & {01-Apr-2000}          \\
+    {10330}               & {Shovel}              & {19-Apr-2000}         
+\end{tabular} \\ \\
+
+
+2.) - Selecione o item e o preço de todos os itens que começam com as letras 'S', 'P' ou 'F'
+
+\begin{lstlisting}
+SELECT item, price
+	FROM items_ordered
+	WHERE item LIKE "S%" OR item LIKE "P%" OR item LIKE "F%";
+\end{lstlisting}
+
+\begin{tabular}{ll}
+    {\textbf{item}} & {\textbf{price}} \\
+    {Pogo stick}    & {28}             \\
+    {Skateboard}    & {33}             \\
+    {Parachute}     & {1250}           \\
+    {Ski Poles}     & {25.5}           \\
+    {Snow Shoes}    & {45}             \\
+    {Sleeping Bag}  & {89.22}          \\
+    {Pillow}        & {8.5}            \\
+    {Flashlight}    & {28}             \\
+    {Flashlight}    & {4.5}            \\
+    {Sleeping Bag}  & {88.7}           \\
+    {Pocket Knife}  & {22.38}          \\
+    {Shovel}        & {16.75}         
+\end{tabular} \\ \\
+
+
+\section{In And Between}
+
+1.) - Selecione a data, o item e o preço da tabela items\_ordered para todas as linhas que possuem um valor de preço variando de 10,00 a 80,00.
+
+\begin{lstlisting}
+SELECT order_date, item, price
+FROM items_ordered
+WHERE price BETWEEN 10 AND 80;
+\end{lstlisting}
+
+\begin{tabular}{lll}
+    {\textbf{order\_date}} & {\textbf{item}}       & {\textbf{price}} \\
+    {30-Jun-1999}          & {Pogo stick}          & {28}             \\
+    {30-Jun-1999}          & {Raft}                & {58}             \\
+    {01-Jul-1999}          & {Skateboard}          & {33}             \\
+    {14-Aug-1999}          & {Ski Poles}           & {25.5}           \\
+    {18-Aug-1999}          & {Rain Coat}           & {18.3}           \\
+    {01-Sep-1999}          & {Snow Shoes}          & {45}             \\
+    {19-Sep-1999}          & {Lantern}             & {29}             \\
+    {01-Dec-1999}          & {Helmet}              & {22}             \\
+    {30-Dec-1999}          & {Hoola Hoop}          & {14.75}          \\
+    {01-Jan-2000}          & {Flashlight}          & {28}             \\
+    {02-Jan-2000}          & {Lantern}             & {16}             \\
+    {18-Jan-2000}          & {Inflatable Mattress} & {38}             \\
+    {18-Jan-2000}          & {Tent}                & {79.99}          \\
+    {19-Jan-2000}          & {Lawnchair}           & {32}             \\
+    {18-Mar-2000}          & {Pocket Knife}        & {22.38}          \\
+    {19-Mar-2000}          & {Canoe paddle}        & {40}             \\
+    {01-Apr-2000}          & {Ear Muffs}           & {12.5}           \\
+    {19-Apr-2000}          & {Shovel}              & {16.75}         
+\end{tabular} \\ \\
+
+
+2.) - Selecione o nome, a cidade e o estado da tabela de clientes para todas as linhas em que o valor do estado é: Arizona, Washington, Oklahoma, Colorado ou Havaí.
+
+\begin{lstlisting}
+SELECT firstname, city, state
+FROM customers
+WHERE state IN ("Arizona", "Washington", "Oklahoma", "Colorado", "Hawaii");    
+\end{lstlisting}
+
+\begin{tabular}{lll}
+    {\textbf{firstname}} & {\textbf{city}} & {\textbf{state}} \\
+    {John}               & {Lynden}        & {Washington}     \\
+    {Leroy}              & {Pinetop}       & {Arizona}        \\
+    {Elroy}              & {Snoqualmie}    & {Washington}     \\
+    {Kelly}              & {Kailua}        & {Hawaii}         \\
+    {Anthony}            & {Winslow}       & {Arizona}        \\
+    {Elroy}              & {Globe}         & {Arizona}        \\
+    {Donald}             & {Gila Bend}     & {Arizona}        \\
+    {Linda}              & {Nogales}       & {Arizona}        \\
+    {Kevin}              & {Durango}       & {Colorado}       \\
+    {Conrad}             & {Telluride}     & {Colorado}       \\
+    {Isabela}            & {Yuma}          & {Arizona}       
+\end{tabular} \\ \\
+
+\newpage
+
+\section{Mathematical Functions}
+
+1.) - Selecione o item e o preço unitário de cada item na tabela items\_ordered. Dica: divida o preço pela quantidade.
+
+\begin{lstlisting}
+SELECT item, price / COUNT(*)
+FROM items_ordered
+GROUP BY item;   
+\end{lstlisting}
+
+\begin{tabular}{ll}
+    {\textbf{item}}       & {\textbf{price / COUNT(*)}} \\
+    {Bicycle}             & {380.5}                     \\
+    {Canoe}               & {280}                       \\
+    {Canoe paddle}        & {40}                        \\
+    {Compass}             & {8}                         \\
+    {Ear Muffs}           & {12.5}                      \\
+    {Flashlight}          & {14}                        \\
+    {Helmet}              & {22}                        \\
+    {Hoola Hoop}          & {14.75}                     \\
+    {Inflatable Mattress} & {38}                        \\
+    {Lantern}             & {14}                        \\
+    {Lawnchair}           & {32}                        \\
+    {Life Vest}           & {125}                       \\
+    {Parachute}           & {1250}                      \\
+    {Pillow}              & {8.5}                       \\
+    {Pocket Knife}        & {22.38}                     \\
+    {Pogo stick}          & {28}                        \\
+    {Raft}                & {58}                        \\
+    {Rain Coat}           & {18.3}                      \\
+    {Shovel}              & {16.75}                     \\
+    {Skateboard}          & {33}                        \\
+    {Ski Poles}           & {25.5}                      \\
+    {Sleeping Bag}        & {44.61}                     \\
+    {Snow Shoes}          & {45}                        \\
+    {Tent}                & {44}                        \\
+    {Umbrella}            & {2.25}                      \\
+    {Unicycle}            & {90.395}                   
+\end{tabular} \\ \\
+
+
+\section{Joins}
+
+1.) - Escreva uma consulta usando uma junção para determinar quais itens foram pedidos por cada um dos clientes na tabela de clientes. Selecione customerid, firstname, lastname, order\_date, item e preço para tudo que cada cliente comprou na tabela items\_ordered.
+
+\begin{lstlisting}
+SELECT customers.customerid, firstname, lastname, order_date, item, price
+FROM customers INNER JOIN items_ordered;
+\end{lstlisting}
+
+\begin{tabular}{llllll}
+    {\textbf{customerid}} & {\textbf{firstname}} & {\textbf{lastname}} & {\textbf{order\_date}} & {\textbf{item}}       & {\textbf{price}} \\
+    {10101}               & {John}               & {Gray}              & {30-Jun-1999}          & {Pogo stick}          & {28}             \\
+    {10101}               & {John}               & {Gray}              & {30-Jun-1999}          & {Raft}                & {58}             \\
+    {10101}               & {John}               & {Gray}              & {01-Jul-1999}          & {Skateboard}          & {33}             \\
+    {10101}               & {John}               & {Gray}              & {01-Jul-1999}          & {Life Vest}           & {125}            \\
+    {10101}               & {John}               & {Gray}              & {06-Jul-1999}          & {Parachute}           & {1250}           \\
+    {10101}               & {John}               & {Gray}              & {27-Jul-1999}          & {Umbrella}            & {4.5}            \\
+    {10101}               & {John}               & {Gray}              & {13-Aug-1999}          & {Unicycle}            & {180.79}         \\
+    {10101}               & {John}               & {Gray}              & {14-Aug-1999}          & {Ski Poles}           & {25.5}           \\
+    {10101}               & {John}               & {Gray}              & {18-Aug-1999}          & {Rain Coat}           & {18.3}           \\
+    {10101}               & {John}               & {Gray}              & {01-Sep-1999}          & {Snow Shoes}          & {45}             \\
+    {10101}               & {John}               & {Gray}              & {18-Sep-1999}          & {Tent}                & {88}             \\
+    {10101}               & {John}               & {Gray}              & {19-Sep-1999}          & {Lantern}             & {29}             \\
+    {10101}               & {John}               & {Gray}              & {28-Oct-1999}          & {Sleeping Bag}        & {89.22}          \\
+    {10101}               & {John}               & {Gray}              & {01-Nov-1999}          & {Umbrella}            & {6.75}           \\
+    {10101}               & {John}               & {Gray}              & {02-Nov-1999}          & {Pillow}              & {8.5}            \\
+    {10101}               & {John}               & {Gray}              & {01-Dec-1999}          & {Helmet}              & {22}             \\
+    {10101}               & {John}               & {Gray}              & {15-Dec-1999}          & {Bicycle}             & {380.5}          \\
+    {10101}               & {John}               & {Gray}              & {22-Dec-1999}          & {Canoe}               & {280}            \\
+    {10101}               & {John}               & {Gray}              & {30-Dec-1999}          & {Hoola Hoop}          & {14.75}          \\
+    {10101}               & {John}               & {Gray}              & {01-Jan-2000}          & {Flashlight}          & {28}             \\
+    {10101}               & {John}               & {Gray}              & {02-Jan-2000}          & {Lantern}             & {16}             \\
+    {10101}               & {John}               & {Gray}              & {18-Jan-2000}          & {Inflatable Mattress} & {38}             \\
+    {10101}               & {John}               & {Gray}              & {18-Jan-2000}          & {Tent}                & {79.99}          \\
+    {10101}               & {John}               & {Gray}              & {19-Jan-2000}          & {Lawnchair}           & {32}             \\
+    {10101}               & {John}               & {Gray}              & {30-Jan-2000}          & {Unicycle}            & {192.5}          \\
+    {10101}               & {John}               & {Gray}              & {02-Feb-2000}          & {Compass}             & {8}              \\
+    {10101}               & {John}               & {Gray}              & {29-Feb-2000}          & {Flashlight}          & {4.5}            \\
+    {10101}               & {John}               & {Gray}              & {08-Mar-2000}          & {Sleeping Bag}        & {88.7}           \\
+    {10101}               & {John}               & {Gray}              & {18-Mar-2000}          & {Pocket Knife}        & {22.38}          \\
+    {10101}               & {John}               & {Gray}              & {19-Mar-2000}          & {Canoe paddle}        & {40}             \\
+    {10101}               & {John}               & {Gray}              & {01-Apr-2000}          & {Ear Muffs}           & {12.5}
+\end{tabular} \\ \\
+
+A query acima foi grande demais para ser mostrada.
